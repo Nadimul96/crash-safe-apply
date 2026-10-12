@@ -1,0 +1,27 @@
+{
+	"format": "crash-safe-apply/bundle@1",
+	"name": "demo-service-tls",
+	"files": [
+		{
+			"path": "README.md",
+			"sha256": "7e89cbe34a10cefbb162ff4b00b121867dc2ece4d6ba7073f35f67e15a6a4a10"
+		},
+		{
+			"path": "bin/healthcheck.sh",
+			"sha256": "2be380241020b9ce3f6ba89456f74b36a606a4e4ceb8c3299e5afe1f7f37a7d3",
+			"mode": "0755"
+		},
+		{
+			"path": "config/app.toml",
+			"sha256": "705b4a3e3eb992cfd569db939b28f252cf46e8aaba308448cea5fee54684d198"
+		},
+		{
+			"path": "config/features.json",
+			"sha256": "8076e8b1f838d2394ae7c3bed8e8cdeb20c04473be60fb9acf7df8ade5f18407"
+		},
+		{
+			"path": "config/tls/ciphers.conf",
+			"sha256": "9c827a84945d33047667980c44005e9e1dbfde542b3473858e84b6a296b2568f"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+# Synthetic service configuration used by the crash-safe-apply demo.
+[server]
+host = "0.0.0.0"
+port = 8080
+workers = 2
+
+[logging]
+level = "info"
