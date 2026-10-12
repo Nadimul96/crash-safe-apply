@@ -8,7 +8,15 @@ import { canTransition } from "./journal.js";
 import { findLatestJournal, openJournal, prepareJournal, readJournal } from "./journal-store.js";
 import { withLock } from "./lock.js";
 import { buildPlan } from "./plan.js";
-import { createDirectories, publish, removeTemp, stageTemp, tempPathFor } from "./publish.js";
+import {
+	createDirectories,
+	journaledPaths,
+	publish,
+	removeTemp,
+	stageTemp,
+	syncParents,
+	tempPathFor,
+} from "./publish.js";
 
 /** @import { JournalFile, JournalView } from "./journal.js" */
 /** @import { JournalWriter } from "./journal-store.js" */
@@ -196,6 +204,7 @@ async function runApply(ctx, journal, identity, outcome) {
 			for (const file of journal.view.files) {
 				files.push(await applyFile(ctx, journal, file, identity));
 			}
+			await syncParents(ctx.io, ctx.target, journaledPaths(journal.view));
 			await journal.appendState("applied");
 			ctx.progress({ kind: "state", state: "applied" });
 		}

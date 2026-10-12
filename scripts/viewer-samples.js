@@ -118,7 +118,7 @@ const samples = [
 					target,
 					plan,
 					faults: (p) => {
-						if (p.op === "fsync-dir" && p.step === "persist config/app.toml") {
+						if (p.op === "rename" && p.step === "publish config/app.toml") {
 							writeFileSync(
 								path.join(target, "config", "features.json"),
 								'{ "owner": "someone else" }\n',

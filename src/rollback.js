@@ -7,11 +7,13 @@ import { Io } from "./io.js";
 import { findLatestJournal, openJournal, readJournal } from "./journal-store.js";
 import { withLock } from "./lock.js";
 import {
+	journaledPaths,
 	publish,
 	removeDirectories,
 	removePublished,
 	removeTemp,
 	stageTemp,
+	syncParents,
 	tempPathFor,
 } from "./publish.js";
 
@@ -105,6 +107,7 @@ async function runRollback(ctx, journal) {
 		);
 		for (const dir of removed) await journal.appendDir(dir, "removed");
 		for (const dir of kept) await journal.appendDir(dir, "kept");
+		await syncParents(ctx.io, ctx.target, journaledPaths(journal.view));
 		await journal.appendState("restored");
 		ctx.progress({ kind: "state", state: "restored" });
 		return result("restored", journal.path, files.toReversed(), kept, ctx.io);

@@ -126,7 +126,7 @@ describe("symlinks in the target are never followed", () => {
 				bundle: s.bundle,
 				target: s.target,
 				faults: (point) => {
-					if (point.step === "persist config/app.toml" && point.op === "fsync-dir") {
+					if (point.step === "publish config/app.toml" && point.op === "rename") {
 						renameSync(path.join(s.target, "config"), path.join(s.root, "moved-config"));
 						symlinkSync(outside, path.join(s.target, "config"));
 					}

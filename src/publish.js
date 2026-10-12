@@ -17,8 +17,12 @@ import { lstatMaybe, resolveInside } from "./fsutil.js";
  *            Atomic and no-clobber: the kernel fails with EEXIST if anything
  *            appeared at the destination after we checked.
  *
- * Both finish by fsyncing the parent directory, which makes the new directory
- * entry durable.
+ * New directory entries are made durable by fsyncing their directories, once
+ * per directory at the end of the run (syncParents), not once per file. That
+ * is safe because recovery classifies every file by its content: if power
+ * loss undoes a publish whose directory was not fsynced yet, the file simply
+ * reads as original again and is redone or left as is. The journal's
+ * "applied" and "restored" records are written only after that fsync.
  */
 
 /**
@@ -57,7 +61,6 @@ export async function publish(io, { absolute, temp, relative, how }) {
 		}
 		await io.unlink(temp, `remove temp for ${relative}`);
 	}
-	await io.syncDirectory(path.dirname(absolute), `persist ${relative}`);
 }
 
 /**
@@ -67,7 +70,33 @@ export async function publish(io, { absolute, temp, relative, how }) {
  */
 export async function removePublished(io, absolute, relative) {
 	await io.unlink(absolute, `remove ${relative}`);
-	await io.syncDirectory(path.dirname(absolute), `persist removal of ${relative}`);
+}
+
+/**
+ * Fsyncs, once each and deepest first, every directory whose entries a run may
+ * have changed: the parent of each journaled file and of each planned
+ * directory. Directories that no longer exist (removed by rollback) are skipped.
+ * @param {Io} io
+ * @param {string} target
+ * @param {readonly string[]} paths  target-relative files and directories
+ */
+export async function syncParents(io, target, paths) {
+	const parents = [...new Set(paths.map((relative) => path.posix.dirname(relative)))];
+	const depth = (/** @type {string} */ dir) => (dir === "." ? 0 : dir.split("/").length);
+	parents.sort((a, b) => depth(b) - depth(a) || a.localeCompare(b));
+	for (const parent of parents) {
+		const resolved = parent === "." ? null : await resolveInside(target, parent).catch(() => null);
+		if (parent !== "." && !resolved?.stat?.isDirectory()) continue;
+		await io.syncDirectory(resolved?.absolute ?? target, `persist entries in ${parent}/`);
+	}
+}
+
+/**
+ * Every path whose parent directory a run may have changed.
+ * @param {{ files: ReadonlyArray<{ path: string }>, header: { directories: readonly string[] } }} view
+ */
+export function journaledPaths(view) {
+	return [...view.files.map((file) => file.path), ...view.header.directories];
 }
 
 /**
@@ -95,9 +124,8 @@ export async function tempPathFor(target, relative, tempBase) {
 }
 
 /**
- * Creates missing parent directories, parents first. Each new directory's
- * parent is fsynced so the directory survives a power cut along with the files
- * that will be published inside it.
+ * Creates missing parent directories, parents first. Their parents are
+ * fsynced later by syncParents, before the journal records "applied".
  * @param {Io} io
  * @param {string} target
  * @param {readonly string[]} directories
@@ -112,7 +140,6 @@ export async function createDirectories(io, target, directories, onCreated) {
 			continue;
 		}
 		await io.mkdir(resolved.absolute, DEFAULT_DIR_MODE, `create directory ${relative}`);
-		await io.syncDirectory(path.dirname(resolved.absolute), `persist directory ${relative}`);
 		await onCreated(relative);
 	}
 }
@@ -146,7 +173,6 @@ export async function removeDirectories(io, target, directories) {
 			}
 			throw error;
 		}
-		await io.syncDirectory(path.dirname(resolved.absolute), `persist removal of ${relative}`);
 		removed.push(relative);
 	}
 	return { removed, kept };

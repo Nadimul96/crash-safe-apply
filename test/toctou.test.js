@@ -89,7 +89,7 @@ describe("changes during apply are refused and recoverable", () => {
 				plan: plan.id,
 				// After config/app.toml is published, someone creates bin/health.sh.
 				faults: (point) => {
-					if (point.op === "fsync-dir" && point.step === "persist config/app.toml")
+					if (point.op === "rename" && point.step === "publish config/app.toml")
 						writeFileSync(edited, "theirs\n");
 				},
 			}),

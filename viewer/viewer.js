@@ -16,8 +16,8 @@ const STATE_COLOR = {
 const STATE_MEANING = {
 	prepared:
 		"Originals backed up and the plan written, all fsynced. Nothing in the target touched yet.",
-	applying: "Writing files: temp file, fsync, then rename(2) or link(2), then fsync the directory.",
-	applied: "Every file published and its directory fsynced.",
+	applying: "Writing files: each one to a temp file, fsync, then rename(2) or link(2) into place.",
+	applied: "Every file published, then every touched directory fsynced once.",
 	complete: "Every file read back and verified against the bundle.",
 	incomplete: "Apply stopped because a file was not as expected. Nothing was overwritten.",
 	restoring: "Putting originals back and removing created files.",
@@ -157,12 +157,8 @@ function describeRecord(record, view) {
 				pending: "Pending",
 			};
 			const how = {
-				applied: create
-					? "temp file, fsync, link(2), fsync directory"
-					: "temp file, fsync, rename(2), fsync directory",
-				restored: create
-					? "unlink(2), fsync directory"
-					: "original from backup, fsync, rename(2), fsync directory",
+				applied: create ? "temp file, fsync, link(2), unlink temp" : "temp file, fsync, rename(2)",
+				restored: create ? "unlink(2)" : "original from backup to a temp file, fsync, rename(2)",
 			};
 			return {
 				title: `${verbs[record.status] ?? escapeHtml(record.status)} ${pathHtml}`,
@@ -175,10 +171,11 @@ function describeRecord(record, view) {
 				removed: "Removed directory",
 				kept: "Kept directory",
 			};
-			const detail =
-				record.status === "kept"
-					? "Left in place because it is not empty."
-					: "Parent directory fsynced.";
+			const detail = {
+				created: "Its parent is fsynced before the applied record.",
+				removed: "Its parent is fsynced before the restored record.",
+				kept: "Left in place because it is not empty.",
+			}[record.status];
 			return {
 				title: `${verbs[record.status] ?? "Directory"} <code>${escapeHtml(record.path)}/</code>`,
 				detail,

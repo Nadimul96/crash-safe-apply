@@ -88,7 +88,7 @@ export function renderPlan(plan, s, how) {
 export function progressLine(s) {
 	const meaning = {
 		applying: "originals backed up and plan fsynced; writing files",
-		applied: "every file published and its directory fsynced",
+		applied: "every file published; touched directories fsynced",
 		complete: "every file read back and verified",
 		restoring: "putting originals back",
 		restored: "every original back in place",
