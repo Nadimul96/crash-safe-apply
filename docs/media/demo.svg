@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="893" height="349" viewBox="0 0 893 349" role="img" aria-label="Terminal recording: crash-safe-apply previews a bundle, an apply is killed with SIGKILL mid-way, status reports it as interrupted, and rollback restores a byte-identical directory.">
+<style>
+text{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"DejaVu Sans Mono",monospace;font-size:13px;fill:#d7dae0;white-space:pre}
+.b{font-weight:700;fill:#f4f5f7}.d{fill:#7d8590}.red{fill:#ff7b72}.green{fill:#56d364}.yellow{fill:#e3b341}.cyan{fill:#56d4dd}.blue{fill:#79c0ff}.magenta{fill:#d2a8ff}
+.title{fill:#8b929c;font-size:12px}.title-step{fill:#8b929c;font-size:12px}
+.cover{fill:#0f1115}.cursor{fill:#c9d1d9}
+.s0{animation:s0 36.47s linear infinite}
+@keyframes s0{0%,0.823%{opacity:0}0.824%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0kv{animation:s0kv 36.47s linear infinite}
+@keyframes s0kv{0%,0.823%{opacity:0}0.824%,6.992%{opacity:1}6.993%,100%{opacity:0}}
+.s0c,.s0k{animation:s0c 36.47s linear infinite}
+@keyframes s0c{0%,2.194%{transform:translateX(0);animation-timing-function:steps(50,end)}6.032%,100%{transform:translateX(396.5px)}}
+.s0r2{animation:s0r2 36.47s linear infinite}
+@keyframes s0r2{0%,7.115%{opacity:0}7.116%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r3{animation:s0r3 36.47s linear infinite}
+@keyframes s0r3{0%,7.239%{opacity:0}7.240%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r4{animation:s0r4 36.47s linear infinite}
+@keyframes s0r4{0%,7.362%{opacity:0}7.363%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r5{animation:s0r5 36.47s linear infinite}
+@keyframes s0r5{0%,7.486%{opacity:0}7.487%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r6{animation:s0r6 36.47s linear infinite}
+@keyframes s0r6{0%,7.609%{opacity:0}7.610%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r7{animation:s0r7 36.47s linear infinite}
+@keyframes s0r7{0%,7.732%{opacity:0}7.733%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r8{animation:s0r8 36.47s linear infinite}
+@keyframes s0r8{0%,7.856%{opacity:0}7.857%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r9{animation:s0r9 36.47s linear infinite}
+@keyframes s0r9{0%,7.979%{opacity:0}7.980%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r10{animation:s0r10 36.47s linear infinite}
+@keyframes s0r10{0%,8.103%{opacity:0}8.104%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r11{animation:s0r11 36.47s linear infinite}
+@keyframes s0r11{0%,8.226%{opacity:0}8.227%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r12{animation:s0r12 36.47s linear infinite}
+@keyframes s0r12{0%,8.349%{opacity:0}8.350%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s0r13{animation:s0r13 36.47s linear infinite}
+@keyframes s0r13{0%,8.473%{opacity:0}8.474%,16.699%{opacity:1}16.700%,100%{opacity:0}}
+.s1{animation:s1 36.47s linear infinite}
+@keyframes s1{0%,17.384%{opacity:0}17.385%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s1kv{animation:s1kv 36.47s linear infinite}
+@keyframes s1kv{0%,17.384%{opacity:0}17.385%,24.650%{opacity:1}24.651%,100%{opacity:0}}
+.s1c,.s1k{animation:s1c 36.47s linear infinite}
+@keyframes s1c{0%,18.755%{transform:translateX(0);animation-timing-function:steps(72,end)}23.691%,100%{transform:translateX(571.0px)}}
+.s1r2{animation:s1r2 36.47s linear infinite}
+@keyframes s1r2{0%,24.774%{opacity:0}24.775%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s1r3{animation:s1r3 36.47s linear infinite}
+@keyframes s1r3{0%,25.925%{opacity:0}25.926%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s1r4{animation:s1r4 36.47s linear infinite}
+@keyframes s1r4{0%,27.077%{opacity:0}27.078%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s1r5{animation:s1r5 36.47s linear infinite}
+@keyframes s1r5{0%,28.229%{opacity:0}28.230%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s1r6{animation:s1r6 36.47s linear infinite}
+@keyframes s1r6{0%,30.148%{opacity:0}30.149%,39.471%{opacity:1}39.472%,100%{opacity:0}}
+.s2{animation:s2 36.47s linear infinite}
+@keyframes s2{0%,40.156%{opacity:0}40.157%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2kv{animation:s2kv 36.47s linear infinite}
+@keyframes s2kv{0%,40.156%{opacity:0}40.157%,46.249%{opacity:1}46.250%,100%{opacity:0}}
+.s2c,.s2k{animation:s2c 36.47s linear infinite}
+@keyframes s2c{0%,41.527%{transform:translateX(0);animation-timing-function:steps(49,end)}45.289%,100%{transform:translateX(388.6px)}}
+.s2r2{animation:s2r2 36.47s linear infinite}
+@keyframes s2r2{0%,46.372%{opacity:0}46.373%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r3{animation:s2r3 36.47s linear infinite}
+@keyframes s2r3{0%,46.496%{opacity:0}46.497%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r4{animation:s2r4 36.47s linear infinite}
+@keyframes s2r4{0%,46.619%{opacity:0}46.620%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r5{animation:s2r5 36.47s linear infinite}
+@keyframes s2r5{0%,46.743%{opacity:0}46.744%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r6{animation:s2r6 36.47s linear infinite}
+@keyframes s2r6{0%,46.866%{opacity:0}46.867%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r7{animation:s2r7 36.47s linear infinite}
+@keyframes s2r7{0%,46.989%{opacity:0}46.990%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r8{animation:s2r8 36.47s linear infinite}
+@keyframes s2r8{0%,47.113%{opacity:0}47.114%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r9{animation:s2r9 36.47s linear infinite}
+@keyframes s2r9{0%,47.236%{opacity:0}47.237%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r10{animation:s2r10 36.47s linear infinite}
+@keyframes s2r10{0%,47.359%{opacity:0}47.360%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r11{animation:s2r11 36.47s linear infinite}
+@keyframes s2r11{0%,47.483%{opacity:0}47.484%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r12{animation:s2r12 36.47s linear infinite}
+@keyframes s2r12{0%,47.606%{opacity:0}47.607%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r13{animation:s2r13 36.47s linear infinite}
+@keyframes s2r13{0%,47.730%{opacity:0}47.731%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s2r14{animation:s2r14 36.47s linear infinite}
+@keyframes s2r14{0%,47.853%{opacity:0}47.854%,62.111%{opacity:1}62.112%,100%{opacity:0}}
+.s3{animation:s3 36.47s linear infinite}
+@keyframes s3{0%,62.797%{opacity:0}62.798%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3kv{animation:s3kv 36.47s linear infinite}
+@keyframes s3kv{0%,62.797%{opacity:0}62.798%,69.043%{opacity:1}69.044%,100%{opacity:0}}
+.s3c,.s3k{animation:s3c 36.47s linear infinite}
+@keyframes s3c{0%,64.168%{transform:translateX(0);animation-timing-function:steps(51,end)}68.083%,100%{transform:translateX(404.4px)}}
+.s3r2{animation:s3r2 36.47s linear infinite}
+@keyframes s3r2{0%,69.166%{opacity:0}69.167%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r3{animation:s3r3 36.47s linear infinite}
+@keyframes s3r3{0%,70.318%{opacity:0}70.319%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r4{animation:s3r4 36.47s linear infinite}
+@keyframes s3r4{0%,71.470%{opacity:0}71.471%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r5{animation:s3r5 36.47s linear infinite}
+@keyframes s3r5{0%,72.621%{opacity:0}72.622%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r6{animation:s3r6 36.47s linear infinite}
+@keyframes s3r6{0%,73.773%{opacity:0}73.774%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r7{animation:s3r7 36.47s linear infinite}
+@keyframes s3r7{0%,73.896%{opacity:0}73.897%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s3r8{animation:s3r8 36.47s linear infinite}
+@keyframes s3r8{0%,74.020%{opacity:0}74.021%,82.246%{opacity:1}82.247%,100%{opacity:0}}
+.s4{animation:s4 36.47s linear infinite}
+@keyframes s4{0%,82.931%{opacity:0}82.932%,98.218%{opacity:1}98.219%,100%{opacity:0}}
+.s4kv{animation:s4kv 36.47s linear infinite}
+@keyframes s4kv{0%,82.931%{opacity:0}82.932%,89.868%{opacity:1}89.869%,100%{opacity:0}}
+.s4c,.s4k{animation:s4c 36.47s linear infinite}
+@keyframes s4c{0%,84.302%{transform:translateX(0);animation-timing-function:steps(60,end)}88.909%,100%{transform:translateX(475.8px)}}
+.s4r2{animation:s4r2 36.47s linear infinite}
+@keyframes s4r2{0%,89.992%{opacity:0}89.993%,98.218%{opacity:1}98.219%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}.scene{opacity:0}.scene.poster{opacity:1}.cover,.cursor{display:none}}
+</style>
+<clipPath id="window"><rect width="893" height="349" rx="10"/></clipPath>
+<rect width="893" height="349" rx="10" fill="#0f1115"/>
+<rect width="893" height="34" rx="10" fill="#1a1d23"/><rect y="24" width="893" height="10" fill="#1a1d23"/>
+<line x1="0" y1="34" x2="893" y2="34" stroke="#262a31"/>
+<circle cx="20" cy="17" r="6" fill="#ff5f57"/><circle cx="40" cy="17" r="6" fill="#febc2e"/><circle cx="60" cy="17" r="6" fill="#28c840"/>
+<text class="title" x="80" y="21">crash-safe-apply · kill -9 mid-apply, then roll back</text>
+<g clip-path="url(#window)">
+<g class="scene s0"><text class="title-step" x="875" y="24" text-anchor="end">step 1 of 5 · preview</text><text class="line" x="18" y="59"><tspan class="d"># Preview is read-only. It prints what would change and a plan id.</tspan></text><text class="line" x="18" y="78"><tspan class="green b">$ </tspan><tspan class="b">crash-safe-apply preview demo-bundle --target site</tspan></text><rect class="cover s0c" x="33.9" y="65" width="404.4" height="19"/><g class="s0kv"><rect class="cursor s0k" x="33.9" y="66" width="7.9" height="16"/></g><text class="line s0r2" x="18" y="97"><tspan class="b">Preview</tspan><tspan>  demo-service-tls  </tspan><tspan class="d">-&gt;</tspan><tspan>  ~/demo/site</tspan></text><text class="line s0r3" x="18" y="116"><tspan class="d">  = same     README.md</tspan></text><text class="line s0r4" x="18" y="135"><tspan class="green">  + create   bin/healthcheck.sh     </tspan><tspan>       93 B</tspan></text><text class="line s0r5" x="18" y="154"><tspan class="yellow">  ~ replace  config/app.toml        </tspan><tspan>      203 B</tspan><tspan class="d">  was dd9f6fbd</tspan></text><text class="line s0r6" x="18" y="173"><tspan class="green">  + create   config/features.json   </tspan><tspan>       82 B</tspan></text><text class="line s0r7" x="18" y="192"><tspan class="green">  + create   config/tls/ciphers.conf</tspan><tspan>      110 B</tspan></text><text class="line s0r8" x="18" y="211"></text><text class="line s0r9" x="18" y="230"><tspan>  4 to write</tspan><tspan class="d"> · </tspan><tspan>1 unchanged</tspan><tspan class="d"> · </tspan><tspan>488 B</tspan><tspan class="d"> · </tspan><tspan>2 new directories</tspan></text><text class="line s0r10" x="18" y="249"><tspan>  Plan </tspan><tspan class="cyan">a2f6af7bdf07a357</tspan></text><text class="line s0r11" x="18" y="268"></text><text class="line s0r12" x="18" y="287"><tspan class="d">  Apply exactly this plan:</tspan></text><text class="line s0r13" x="18" y="306"><tspan>    crash-safe-apply apply demo-bundle --target site --plan a2f6af7bdf07a357</tspan></text></g>
+<g class="scene s1"><text class="title-step" x="875" y="24" text-anchor="end">step 2 of 5 · apply, killed mid-way</text><text class="line" x="18" y="59"><tspan class="d"># Apply exactly that plan. The demo sends SIGKILL after the second file.</tspan></text><text class="line" x="18" y="78"><tspan class="green b">$ </tspan><tspan class="b">crash-safe-apply apply demo-bundle --target site --plan a2f6af7bdf07a357</tspan></text><rect class="cover s1c" x="33.9" y="65" width="578.9" height="19"/><g class="s1kv"><rect class="cursor s1k" x="33.9" y="66" width="7.9" height="16"/></g><text class="line s1r2" x="18" y="97"><tspan class="b">Apply</tspan><tspan>  demo-bundle  </tspan><tspan class="d">-&gt;</tspan><tspan>  site</tspan></text><text class="line s1r3" x="18" y="116"><tspan class="d">  journal  applying   originals backed up and plan fsynced; writing files</tspan></text><text class="line s1r4" x="18" y="135"><tspan class="green">  + created  bin/healthcheck.sh</tspan></text><text class="line s1r5" x="18" y="154"><tspan class="yellow">  ~ replaced config/app.toml</tspan></text><text class="line s1r6" x="18" y="173"><tspan class="red">Killed: 9</tspan></text></g>
+<g class="scene s2 poster"><text class="title-step" x="875" y="24" text-anchor="end">step 3 of 5 · status after the crash</text><text class="line" x="18" y="59"><tspan class="d"># Status reads the journal: the run was interrupted, and here is how to finish or undo it.</tspan></text><text class="line" x="18" y="78"><tspan class="green b">$ </tspan><tspan class="b">crash-safe-apply status demo-bundle --target site</tspan></text><rect class="cover s2c" x="33.9" y="65" width="396.5" height="19"/><g class="s2kv"><rect class="cursor s2k" x="33.9" y="66" width="7.9" height="16"/></g><text class="line s2r2" x="18" y="97"><tspan class="b">Status</tspan><tspan>  demo-service-tls  </tspan><tspan class="d">-&gt;</tspan><tspan>  ~/demo/site</tspan></text><text class="line s2r3" x="18" y="116"><tspan>  State    </tspan><tspan class="b yellow">interrupted</tspan><tspan> during apply  </tspan><tspan class="d">the process stopped mid-way; no run holds the lock</tspan></text><text class="line s2r4" x="18" y="135"><tspan>  Journal  .crash-safe-apply/02a48525acd1e852/1/journal.log  </tspan><tspan class="d">last state "applying", 8 records</tspan></text><text class="line s2r5" x="18" y="154"><tspan>  Lock     </tspan><tspan class="d">stale (apply, pid 75896 has exited)</tspan></text><text class="line s2r6" x="18" y="173"></text><text class="line s2r7" x="18" y="192"><tspan>  applied   + bin/healthcheck.sh       </tspan><tspan class="green">installed</tspan></text><text class="line s2r8" x="18" y="211"><tspan>  applied   ~ config/app.toml          </tspan><tspan class="green">installed</tspan></text><text class="line s2r9" x="18" y="230"><tspan>  pending   + config/features.json     </tspan><tspan class="d">original</tspan></text><text class="line s2r10" x="18" y="249"><tspan>  pending   + config/tls/ciphers.conf  </tspan><tspan class="d">original</tspan></text><text class="line s2r11" x="18" y="268"></text><text class="line s2r12" x="18" y="287"><tspan class="d">  Next</tspan></text><text class="line s2r13" x="18" y="306"><tspan>    crash-safe-apply apply demo-bundle --target site --plan a2f6af7bdf07a357   </tspan><tspan class="d">finish the interrupted apply</tspan></text><text class="line s2r14" x="18" y="325"><tspan>    crash-safe-apply rollback demo-bundle --target site                        </tspan><tspan class="d">restore every original file</tspan></text></g>
+<g class="scene s3"><text class="title-step" x="875" y="24" text-anchor="end">step 4 of 5 · rollback</text><text class="line" x="18" y="59"><tspan class="d"># Roll back to the original bytes.</tspan></text><text class="line" x="18" y="78"><tspan class="green b">$ </tspan><tspan class="b">crash-safe-apply rollback demo-bundle --target site</tspan></text><rect class="cover s3c" x="33.9" y="65" width="412.4" height="19"/><g class="s3kv"><rect class="cursor s3k" x="33.9" y="66" width="7.9" height="16"/></g><text class="line s3r2" x="18" y="97"><tspan class="b">Rollback</tspan><tspan>  demo-bundle  </tspan><tspan class="d">-&gt;</tspan><tspan>  site</tspan></text><text class="line s3r3" x="18" y="116"><tspan class="d">  journal  restoring  putting originals back</tspan></text><text class="line s3r4" x="18" y="135"><tspan class="yellow">  ~ restored config/app.toml</tspan></text><text class="line s3r5" x="18" y="154"><tspan class="red">  - removed  bin/healthcheck.sh</tspan></text><text class="line s3r6" x="18" y="173"><tspan class="d">  journal  restored   every original back in place</tspan></text><text class="line s3r7" x="18" y="192"></text><text class="line s3r8" x="18" y="211"><tspan>  </tspan><tspan class="b">Restored.</tspan><tspan> Every file this bundle changed holds its original bytes again.</tspan></text></g>
+<g class="scene s4"><text class="title-step" x="875" y="24" text-anchor="end">step 5 of 5 · verify</text><text class="line" x="18" y="59"><tspan class="d"># Compare with an untouched copy of the original directory.</tspan></text><text class="line" x="18" y="78"><tspan class="green b">$ </tspan><tspan class="b">diff -r -x .crash-safe-apply original site &amp;&amp; echo identical</tspan></text><rect class="cover s4c" x="33.9" y="65" width="483.7" height="19"/><g class="s4kv"><rect class="cursor s4k" x="33.9" y="66" width="7.9" height="16"/></g><text class="line s4r2" x="18" y="97"><tspan>identical</tspan></text></g>
+</g>
+</svg>
