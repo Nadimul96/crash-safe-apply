@@ -57,7 +57,7 @@ export function renderPlan(plan, s, how) {
 		const label = change.action === "unchanged" ? "same" : change.action;
 		const row = `  ${MARK[change.action]} ${label.padEnd(8)} ${change.path.padEnd(width)}`;
 		if (change.action === "unchanged") {
-			lines.push(s.dim(row));
+			lines.push(s.dim(row.trimEnd()));
 			continue;
 		}
 		const color = change.action === "create" ? s.green : s.yellow;
@@ -90,18 +90,18 @@ export function progressLine(s) {
 		applying: "originals backed up and plan fsynced; writing files",
 		applied: "every file published and its directory fsynced",
 		complete: "every file read back and verified",
-		restoring: "restoring originals",
+		restoring: "putting originals back",
 		restored: "every original back in place",
 	};
 	return (event) => {
 		if (event.kind === "state") {
 			const why = meaning[/** @type {keyof typeof meaning} */ (event.state)] ?? "";
-			return s.dim(`  journal  ${event.state.padEnd(9)} ${why}`);
+			return s.dim(`  journal  ${event.state.padEnd(10)} ${why}`);
 		}
 		const mark = event.action === "created" ? "+" : event.action === "removed" ? "-" : "~";
 		const color =
 			event.action === "created" ? s.green : event.action === "removed" ? s.red : s.yellow;
-		return color(`  ${mark} ${event.action.padEnd(8)} ${event.path}`);
+		return color(`  ${mark} ${event.action.padEnd(9)}${event.path}`);
 	};
 }
 
@@ -197,11 +197,11 @@ export function renderStatus(report, s, how) {
 	}
 	if (report.next.length > 0) {
 		lines.push("", s.dim("  Next"));
-		for (const step of report.next) {
-			lines.push(
-				`    ${command(how, step.command, step.plan ?? undefined)}   ${s.dim(step.reason)}`,
-			);
-		}
+		const commands = report.next.map((step) => command(how, step.command, step.plan ?? undefined));
+		const width = Math.max(...commands.map((text) => text.length));
+		report.next.forEach((step, index) => {
+			lines.push(`    ${(commands[index] ?? "").padEnd(width)}   ${s.dim(step.reason)}`);
+		});
 	}
 	return lines.join("\n");
 }

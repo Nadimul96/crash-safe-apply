@@ -94,9 +94,9 @@ describe("crash-safe-apply CLI", () => {
 
 		const applied = await invoke("apply", s.bundle, "--target", s.target, "--plan", plan);
 		assert.equal(applied.code, 0, applied.stderr);
-		assert.match(applied.stdout, /journal {2}applying/);
+		assert.match(applied.stdout, /journal {2}applying /);
 		assert.match(applied.stdout, /\+ created\s+config\/features\.json/);
-		assert.match(applied.stdout, /journal {2}complete/);
+		assert.match(applied.stdout, /journal {2}complete /);
 		assert.deepEqual(await snapshot(s.target), s.expected);
 
 		const reported = await invoke("status", s.bundle, "--target", s.target);
