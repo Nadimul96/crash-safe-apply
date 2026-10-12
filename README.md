@@ -1,5 +1,7 @@
 # crash-safe-apply
 
+**Transactional file changes for scripts and AI coding agents: preview, apply, and roll back, even after `kill -9` or a power cut.**
+
 Preview, apply and roll back a bundle of file changes with a crash-consistent journal. If the process is killed or the power goes out at any point, the target directory ends up either fully applied or restorable to its original bytes, and files that changed between preview and apply are refused rather than overwritten. Zero runtime dependencies, Node 22+.
 
 ![Terminal recording: preview, an apply killed with SIGKILL after two files, status reporting the interrupted run, rollback, and a diff proving the directory is identical to the original](docs/media/demo.svg)
@@ -9,11 +11,22 @@ Preview, apply and roll back a bundle of file changes with a crash-consistent jo
 ![Node 22+](https://img.shields.io/badge/node-22%2B-339933)
 ![Runtime dependencies: 0](https://img.shields.io/badge/runtime%20dependencies-0-555)
 
+## Where AI fits
+
+The main use case is a safety layer for file changes proposed by AI coding agents (or any automation you only half trust). An agent writes its proposed edits as a bundle; a human or a policy reviews `preview`; `apply --plan <id>` then runs exactly what was approved, and `rollback` restores the original bytes if the result is wrong, even when the agent or the apply was killed midway.
+
+- **Review before write.** `preview --json` lists every create/replace with sizes and writes nothing, so it can feed an approval UI or a CI check.
+- **Approved means approved.** The plan id fingerprints every target file; if a human or another agent edits the tree after review, apply refuses with `PLAN_MISMATCH` instead of clobbering it ([`src/plan.js`](src/plan.js)).
+- **Undo that respects later human edits.** Rollback refuses to overwrite a file someone changed after apply ([`src/classify.js`](src/classify.js)).
+- **Contained writes.** `O_NOFOLLOW` and an `lstat` walk stop a bundle from escaping the target through symlinks or `..` paths ([`src/fsutil.js`](src/fsutil.js), [`src/paths.js`](src/paths.js)).
+
+To be clear: this repo contains **no LLM, model call or agent integration**. It is the deterministic apply/rollback engine an agent harness would call (via the CLI with `--json` or the library API). Producing the bundle from an agent's diff is up to the caller; deletes are not supported yet.
+
 ## The problem
 
 Installers, config-management runs and deploy scripts usually change files one at a time with plain writes. If the process dies halfway (a kill -9, an OOM kill, a laptop lid, a power cut), the machine is left with some files new, some old, maybe one truncated, and no record of which. Even tools that write a temp file and rename it often forget to fsync the file and its directory, so after power loss the "new" file can be empty or the old one can come back. And most tools overwrite whatever is on disk, including edits someone made after the change was reviewed. crash-safe-apply treats a set of file changes like a small database transaction: it writes a journal and backups first, publishes each file atomically, makes each step durable in the right order, and can always tell you exactly where it stopped and how to finish or undo it.
 
-## Why it's interesting
+## Why this is novel
 
 - **Crash-tested after every syscall.** All writes, fsyncs, renames, links, unlinks and mkdirs go through one I/O layer ([`src/io.js`](src/io.js)) that calls a hook after each step. The fault matrix crashes a fresh copy of the scenario after each of those steps, including torn (half-written) writes, then checks recovery: **423 crash points, 512 recoveries, 0 failures** ([`docs/fault-matrix.md`](docs/fault-matrix.md)). Separate tests kill a real child process with SIGKILL at chosen steps and at random moments mid-apply ([`test/sigkill.test.js`](test/sigkill.test.js)).
 - **The right primitive for each publish.** Replacements are written to a temp file, fsynced and `rename(2)`d over the old file, so the name never disappears. New files are published with `link(2)`, which the kernel refuses with `EEXIST` if anything appeared there in the meantime. Each touched directory is fsynced before the journal says "applied" ([`src/publish.js`](src/publish.js)).
