@@ -278,7 +278,10 @@ function renderMachine(view) {
 		})
 		.join("");
 	const chips = view.path
-		.map((state) => `<span class="chip" style="--state:${stateVar(state)}">${state}</span>`)
+		.map(
+			(state) =>
+				`<span class="chip" style="--state:${stateVar(state)}">${escapeHtml(state)}</span>`,
+		)
 		.join('<span class="sep">→</span>');
 	return `
 		<section class="card machine" aria-label="Journal state machine">
