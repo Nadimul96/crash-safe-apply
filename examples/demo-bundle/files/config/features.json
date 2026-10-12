@@ -1,5 +1,5 @@
 {
-	"checkout_v2": true,
-	"search_suggestions": false,
-	"rollout_percent": 25
+  "checkout_v2": true,
+  "search_suggestions": false,
+  "rollout_percent": 25
 }
