@@ -1,0 +1,51 @@
+{
+	"name": "crash-safe-apply",
+	"version": "0.1.0",
+	"description": "Preview, apply and roll back a bundle of file changes with a crash-consistent journal. Zero runtime dependencies.",
+	"license": "MIT",
+	"author": "Nadimul Haque",
+	"type": "module",
+	"engines": {
+		"node": ">=22"
+	},
+	"os": [
+		"darwin",
+		"linux",
+		"freebsd",
+		"openbsd"
+	],
+	"bin": {
+		"crash-safe-apply": "./bin/crash-safe-apply.js"
+	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./src/index.js"
+		}
+	},
+	"files": [
+		"bin",
+		"src",
+		"dist"
+	],
+	"scripts": {
+		"demo": "node scripts/demo.js",
+		"test": "node --test --test-reporter=spec \"test/**/*.test.js\"",
+		"lint": "biome check .",
+		"format": "biome check --write .",
+		"typecheck": "tsc -p tsconfig.json",
+		"build": "tsc -p tsconfig.build.json",
+		"bench": "node scripts/bench.js",
+		"fault-report": "node scripts/fault-report.js",
+		"viewer:samples": "node scripts/viewer-samples.js",
+		"media:demo": "node scripts/record-demo.js",
+		"media:screenshots": "node scripts/screenshot-viewer.js"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.15",
+		"@types/node": "22.20.5",
+		"playwright-core": "1.64.0",
+		"typescript": "7.0.2"
+	},
+	"packageManager": "pnpm@10.13.1"
+}
